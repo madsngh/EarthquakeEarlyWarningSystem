@@ -1,0 +1,161 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Dashboard Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+	<!--Jquery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+
+    <!--Google Maps-->
+        <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAku8DcWMwO9f8YVy4Qbom3RSmOB7sRPneGnHdBjmMnq4YTUhpZxQLtjgcKvFYOImH-uVUqU8bi4sEOQ" type="text/javascript"></script>
+
+	<!--javascript-->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <!-- Custom styles for this template -->
+        <link type="text/css" rel="stylesheet" href='{% static "css/dashboard.css" %}'/>
+        <link type="text/css" rel="stylesheet" href='{% static "css/display_kml.css" %}'/>
+      <style>
+            li{
+		        max-width:200px;
+		        word-wrap:break-word;  }
+      </style>
+  </head>
+
+  <body onload="load()">
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Project name</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Dashboard</a></li>
+            <li><a href="#">Settings</a></li>
+            <li><a href="#">Profile</a></li>
+            <li><a href="#">Help</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-4 col-md-2 sidebar">
+
+            <div id="red" class="list-group nav nav-sidebar ">
+                <button type="button" class="warning list-group-item list-group-item-action" style="background-color: red; color: white;text-align:center">Red Alert</button>
+            </div>
+
+            <div id="yellow" class="list-group nav nav-sidebar ">
+                <button type="button" class="warning list-group-item list-group-item-action" style="background-color: #fffa00; color: white;text-align:center">Yellow Alert</button>
+            </div>
+
+            <div id="green" class="list-group nav nav-sidebar ">
+                <button type="button" class="warning list-group-item list-group-item-action" style="background-color: green; color: white;text-align:center">Green Alert</button>
+            </div>
+        </div>
+        <div class="col-sm-8 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+         <h1 class="page-header">Earthquake</h1>
+          <div class="row placeholders">
+            <div id="map" style="width: 100%; height: 420px; border: 1px solid black; padding: 2px"></div>
+          </div>
+            <h2 class="sub-header active">Past Data</h2>
+
+            <div class="row placeholders">
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <div id="green" class="list-group">
+                      <button type="button" class="warning list-group-item list-group-item-action active"style="text-align: center">Past 1 Hour</button>
+                        <a href="/past/1hr/4.5" class="list-group-item">4.5+ Earthquakes</a>
+                        <a href="/past/1hr/2.5" class="list-group-item">2.5+ Earthquakes</a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <div id="green" class="list-group">
+                      <button type="button" class="warning list-group-item list-group-item-action active"style="text-align: center">Past 1 Days</button>
+                        <a href="/past/1days/4.5" class="list-group-item">4.5+ Earthquakes</a>
+                        <a href="/past/1days/2.5" class="list-group-item">2.5+ Earthquakes</a>
+                </div>
+
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+                <div id="green" class="list-group">
+                      <button type="button" class="warning list-group-item list-group-item-action active"style="text-align: center">Past 7 Days</button>
+                        <a href="/past/7days/4.5" class="list-group-item">4.5+ Earthquakes</a>
+                        <a href="/past/7days/2.5" class="list-group-item">2.5+ Earthquakes</a>
+                </div>
+            </div>
+            <div class="col-xs-6 col-sm-3 placeholder">
+                    <div id="green" class="list-group">
+                      <button type="button" class="warning list-group-item list-group-item-action active"style="text-align: center">Past 30 Days</button>
+                        <a href="/past/30days/4.5" class="list-group-item">4.5+ Earthquakes</a>
+                        <a href="/past/30days/2.5" class="list-group-item">2.5+ Earthquakes</a>
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+        $(document).ready(function(){
+            $.getJSON("https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={{ past_day }}&endtime={{time_now }}&minmagnitude=1", function(result){
+                    if(result.metadata.count>0) {
+                    $.each(result.features, function (i, field) {
+                        var d = new Date(result.features[i].properties.time);
+                        var formattedDate = d.getDate() + "-" + (d.getMonth() + 1) + "-" + d.getFullYear();
+                        var hours = (d.getHours() < 10) ? "0" + d.getHours() : d.getHours();
+                        var minutes = (d.getMinutes() < 10) ? "0" + d.getMinutes() : d.getMinutes();
+                        var formattedTime = hours + ":" + minutes;
+                        formattedDate = formattedDate + " " + formattedTime;
+                        $("#red").append('<button type="button" class="list-group-item list-group-item-action"><span class="list-callout" style="font-size: small">' + 'mag: ' + result.features[i].properties.mag + '</span><h1 class="list-header" style="font-size: small">' + 'place :' + result.features[i].properties.place + '</h1><h2 class="list-subheader" style="font-size:small" >' + 'time :' + formattedDate + '</h2><aside class="list-aside">' + result.features[i].geometry.coordinates[2] + 'KM' + '</aside></button>');
+                    });
+                }
+                else{
+                 $("#red").append('<button type="button" class="warning list-group-item list-group-item-action">'+"This List is empty"+'</button>');
+                }
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        var map;
+        var geoXml = new GGeoXml("https://earthquake.usgs.gov/fdsnws/event/1/query?format=kml&starttime={{ past_day }}&endtime={{ time_now }}&minmagnitude=1")
+        function load() {
+            if (GBrowserIsCompatible()) {
+                map = new GMap2(document.getElementById("map"));
+                map.addControl(new GLargeMapControl());
+                map.addControl(new GMapTypeControl());
+                map.addControl(new GOverviewMapControl());
+                map.addOverlay(geoXml);
+                geoXml.gotoDefaultViewport(map)
+                    }
+                }
+    </script>
+  </body>
+</html>
