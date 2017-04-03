@@ -14,8 +14,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Dashboard Template for Bootstrap</title>
-
+    <title> Earthquake Early Warning System </title>
     <!-- Bootstrap core CSS -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
@@ -41,6 +40,7 @@
   <body onload="load()">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
+
       <div class="container-fluid">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -52,15 +52,9 @@
           <a class="navbar-brand" href="#">Project name</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">Dashboard</a></li>
-            <li><a href="#">Settings</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Help</a></li>
+            <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">Contact Us</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
-          </form>
         </div>
       </div>
     </nav>
@@ -118,7 +112,7 @@
 
     <script>
         $(document).ready(function(){
-            $.getJSON("https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={{ past_day }}&endtime={{time_now }}&minmagnitude=4.5", function(result){
+            $.getJSON("https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={{ past_day }}&endtime={{ time_nowgi }}&minmagnitude=4.5", function(result){
                     if(result.metadata.count>0) {
                     $.each(result.features, function (i, field) {
                         var d = new Date(result.features[i].properties.time);
